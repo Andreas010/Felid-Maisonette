@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TriggerCheck groundCheck;
     [SerializeField] Transform visuals;
 
+    Animator animator;
     Controls input;
     Vector2 joy;
     #endregion
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        animator = transform.parent.GetComponent<Animator>();
         InitControls();
     }
 
@@ -48,6 +50,12 @@ public class PlayerController : MonoBehaviour
         ApplyHorizontalInput(joy.x);
         if (joy.x > .5f) visuals.localScale = Vector3.one;
         if (joy.x < -.5f) visuals.localScale = new Vector3(-1, 1, 1);
+
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Sprinting", sprinting);
+        animator.SetFloat("Magnitude", rig.velocity.magnitude);
+        animator.SetFloat("XVel", rig.velocity.x);
+        animator.SetFloat("YVel", rig.velocity.y);
     }
 
     private void FixedUpdate()
