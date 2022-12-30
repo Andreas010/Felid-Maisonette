@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "b24e6574-eda6-4f54-8ad8-a04cee4f5dea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -121,7 +130,7 @@
                 {
                     "name": "",
                     "id": "0f3d2572-bd7e-4f6f-b69f-778497bc4c37",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -132,7 +141,7 @@
                 {
                     "name": "",
                     "id": "f7f0e0a8-e045-4810-8742-2458099e2505",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -242,7 +251,7 @@
                 {
                     "name": "",
                     "id": "b3cea966-e520-4dac-94e0-fbe238e1fa31",
-                    "path": "<XInputController>/buttonEast",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -253,11 +262,44 @@
                 {
                     "name": "",
                     "id": "d0ccd986-ff5e-4f37-87a9-c04c38af5e2c",
-                    "path": "<SwitchProControllerHID>/buttonSouth",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5b0b0e9-4842-4c8b-9139-4cd94bfbeea8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59ba7ad2-9972-4852-9bdb-595883f12180",
+                    "path": "<SwitchProControllerHID>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "387fc3e8-b26f-46d2-83fb-7e483bc3e8de",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

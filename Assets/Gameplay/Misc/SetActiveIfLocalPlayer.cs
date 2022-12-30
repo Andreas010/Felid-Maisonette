@@ -9,7 +9,7 @@ public class SetActiveIfLocalPlayer : MonoBehaviour
     [SerializeField] GameObject[] objs;
     [SerializeField] NetworkIdentity identity;
 
-    void Awake()
+    void Start()
     {
         if(NetworkClient.localPlayer != identity)
         {

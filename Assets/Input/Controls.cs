@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""b24e6574-eda6-4f54-8ad8-a04cee4f5dea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,7 +152,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0f3d2572-bd7e-4f6f-b69f-778497bc4c37"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -154,7 +163,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f7f0e0a8-e045-4810-8742-2458099e2505"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -264,7 +273,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b3cea966-e520-4dac-94e0-fbe238e1fa31"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -275,11 +284,44 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d0ccd986-ff5e-4f37-87a9-c04c38af5e2c"",
-                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
+                    ""path"": ""<SwitchProControllerHID>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5b0b0e9-4842-4c8b-9139-4cd94bfbeea8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59ba7ad2-9972-4852-9bdb-595883f12180"",
+                    ""path"": ""<SwitchProControllerHID>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""387fc3e8-b26f-46d2-83fb-7e483bc3e8de"",
+                    ""path"": ""<SwitchProControllerHID>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -295,6 +337,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_World_Jump = m_World.FindAction("Jump", throwIfNotFound: true);
         m_World_Attack = m_World.FindAction("Attack", throwIfNotFound: true);
         m_World_Sprint = m_World.FindAction("Sprint", throwIfNotFound: true);
+        m_World_Dash = m_World.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +402,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_Jump;
     private readonly InputAction m_World_Attack;
     private readonly InputAction m_World_Sprint;
+    private readonly InputAction m_World_Dash;
     public struct WorldActions
     {
         private @Controls m_Wrapper;
@@ -368,6 +412,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_World_Jump;
         public InputAction @Attack => m_Wrapper.m_World_Attack;
         public InputAction @Sprint => m_Wrapper.m_World_Sprint;
+        public InputAction @Dash => m_Wrapper.m_World_Dash;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -392,6 +437,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
+                @Dash.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_WorldActionsCallbackInterface = instance;
             if (instance != null)
@@ -411,6 +459,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -422,5 +473,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

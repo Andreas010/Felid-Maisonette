@@ -227,12 +227,25 @@ MonoBehaviour:
   groundCheckCol: {fileID: 606045913646631567}
   groundCheck: {fileID: 606045913646631560}
   visuals: {fileID: 606045914236332972}
-  srs: []
+  physicsMaterials:
+  - {fileID: 6200000, guid: c5b84ea94f53a294581e383307d15ddb, type: 2}
+  - {fileID: 6200000, guid: 2b44c434f18d3c84dacfc77cd3988683, type: 2}
+  srs:
+  - {fileID: 606045914774501866}
+  - {fileID: 606045914544496467}
+  - {fileID: 606045914503568023}
+  partSpriteIndexes: 000000000000000000000000
   walkSpeed: 4.5
   runSpeed: 7.5
   acceleration: 25
   jumpForce: 11.5
-  counterJump: 3
+  counterJump: 6
+  velYToApplyCounterJump: -1
+  jumpInputForgiveness: 0.5
+  cyoteTime: 0.13
+  dashForce: 14
+  dashTime: 0.2
+  maxDashCooldown: 1
 --- !u!70 &4273714868802898245
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -322,7 +335,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 1
-  sendRate: 30
+  sendRate: 45
   bufferTimeMultiplier: 2
   bufferSizeLimit: 64
   catchupNegativeThreshold: -1

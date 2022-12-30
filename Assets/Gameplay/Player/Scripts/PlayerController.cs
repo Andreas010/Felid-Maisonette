@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+using System.Text.RegularExpressions;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -12,8 +13,11 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] CircleCollider2D groundCheckCol;
     [SerializeField] TriggerCheck groundCheck;
     [SerializeField] Transform visuals;
+    CapsuleCollider2D collider;
+    [SerializeField] PhysicsMaterial2D[] physicsMaterials; // 0 = no friction, 1 = high friction
 
-    [SerializeField] SpriteRenderer[] srs; // 0 = head, 1 = torso, 2 = legs
+    [SerializeField] SpriteRenderer[] srs; //(index) 0 = head, 1 = torso, 2 = legs
+    [SerializeField] int[] partSpriteIndexes = new int[3]; //(index) 0 = head, 1 = torso, 2 = legs (this variable is which frame of animation each part of the player is currently on)
 
     Animator animator;
     Controls input;
@@ -22,25 +26,28 @@ public class PlayerController : NetworkBehaviour
 
     #region stats
     [Header("Stats")]
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
-    [SerializeField] float acceleration;
-    [SerializeField] float jumpForce;
-    [SerializeField] float counterJump;
+    [SerializeField] float walkSpeed = 4.5f; [SerializeField] float runSpeed = 7.5f; [SerializeField] float acceleration = 25f;
+    [SerializeField] float jumpForce = 11.5f; [SerializeField] float counterJump = 3; [SerializeField] float velYToApplyCounterJump; /* Y velocity when jumping that will automatically apply the counter jump */ [SerializeField] float jumpInputForgiveness = .5f; float timeSinceJump; bool counterJumpApplied;
+    [SerializeField] float cyoteTime = .25f;
+    [SerializeField] float dashForce = 14f; [SerializeField] float dashTime = .2f; [SerializeField] float maxDashCooldown = 1f; float dashCooldown;
     #endregion
 
-    bool dir;
-    bool grounded;
+    bool facingRight;
+    bool grounded; float timeSinceGrounded;
     bool sprinting;
     bool jumpHeld; bool jumping;
 
     float curSpeed;
+
+    bool dashing; bool canDash;
+    bool canMove;
 
     #region unityMethods
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<CapsuleCollider2D>();
         InitControls();
     }
 
@@ -50,29 +57,42 @@ public class PlayerController : NetworkBehaviour
         if (sprinting) curSpeed = runSpeed; else curSpeed = walkSpeed;
         grounded = groundCheck.overlapping;
 
-
-        ApplyHorizontalInput(joy.x);
-        if (joy.x > .5f)  visuals.localScale = Vector3.one;
-        if (joy.x < -.5f) visuals.localScale = new Vector3(-1, 1, 1);
-
-        animator.SetBool("Grounded", grounded);
-        animator.SetBool("Sprinting", sprinting);
-        animator.SetFloat("Magnitude", rig.velocity.magnitude);
-        animator.SetFloat("XVel", rig.velocity.x);
-        animator.SetFloat("YVel", rig.velocity.y);
-
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (jumping)
+        canMove = !dashing;
+        if(canMove)
         {
-            if (!jumpHeld)// && Vector2.Dot(rig.velocity, Vector2.up) > 0)
+            ApplyHorizontalInput(joy.x);
+            if (joy.x > .5f) { facingRight = true; visuals.localScale = Vector3.one; }
+            if (joy.x < -.5f) { facingRight = false; visuals.localScale = new Vector3(-1, 1, 1); }
+
+            if (jumping && rig.velocity.y < velYToApplyCounterJump && !counterJumpApplied) { counterJumpApplied = true; rig.velocity = new Vector2(rig.velocity.x, -counterJump); }
+
+            if (grounded)
             {
-                //jumping = false;
+                if (timeSinceJump > .25f) { jumping = false; counterJumpApplied = false; }
+                if(timeSinceJump < jumpInputForgiveness && jumpHeld) { Jump(new InputAction.CallbackContext()); }
+                canDash = true;
             }
+            else
+            {
+                
+            }
+
+            animator.SetBool("Grounded", grounded);
+            animator.SetBool("Sprinting", sprinting);
+            animator.SetFloat("Magnitude", rig.velocity.magnitude);
+            animator.SetFloat("XVel", rig.velocity.x);
+            animator.SetFloat("YVel", rig.velocity.y);
         }
+
+        for (int i = 0; i < 3; i++) { partSpriteIndexes[i] = int.Parse(Regex.Replace(srs[i].sprite.name, "[A-Za-z ]", "").Trim('_')); }
+
+        if (joy.x > -.1f && joy.x < .1f && grounded) collider.sharedMaterial = physicsMaterials[1];
+        else collider.sharedMaterial = physicsMaterials[0];
+
+        dashCooldown -= Time.deltaTime;
+        timeSinceJump += Time.deltaTime;
+        if (!grounded) timeSinceGrounded += Time.deltaTime; else timeSinceGrounded = 0;
+
     }
     #endregion
 
@@ -112,12 +132,20 @@ public class PlayerController : NetworkBehaviour
 
         input.World.Sprint.performed += Sprint;
         input.World.Sprint.canceled += CancelSprint;
+
+        input.World.Dash.performed += Dash;
+
+    }
+    Vector2 JoyVector()
+    {
+        return new Vector2(joy.x, joy.y);
     }
 
     public void Jump(InputAction.CallbackContext t_context) 
     {
+        timeSinceJump = 0;
         jumpHeld = true;
-        if (grounded)
+        if (canMove && (grounded || timeSinceGrounded < cyoteTime))
         {
             jumping = true;
             //rig.AddForce(Vector2.up * jumpForce * rig.mass, ForceMode2D.Impulse);
@@ -128,12 +156,43 @@ public class PlayerController : NetworkBehaviour
     { 
         jumpHeld = false;
         //if (rig.velocity.y > 5) rig.velocity = new Vector2(rig.velocity.x, 0);
-         if (rig.velocity.y > -counterJump) rig.velocity = new Vector2(rig.velocity.x, -counterJump);
-        else rig.velocity = new Vector2(rig.velocity.x, rig.velocity.y * 2);
+        if (rig.velocity.y > -counterJump) rig.velocity = new Vector2(rig.velocity.x, -counterJump);
+        //else if (rig.velocity.y > ) rig.velocity = new Vector2(rig.velocity.x, rig.velocity.y * 2);
     }
 
     public void Sprint(InputAction.CallbackContext t_context) { sprinting = true; }
     public void CancelSprint(InputAction.CallbackContext t_context) { sprinting = false; }
+
+    #region dash
+    public void Dash(InputAction.CallbackContext t_context)
+    {
+        if (dashCooldown > 0 || !canDash) return;
+        dashing = true;
+        canDash = false;
+
+        animator.StopPlayback();
+        animator.SetBool("Dashing", true);
+        animator.SetTrigger("Roll");
+        //if (!((joy.x > -.2f && joy.x < .2f) && joy.y > .2f)) animator.SetTrigger("Roll");
+        if (joy.magnitude < .2f)
+        {
+            if (facingRight) rig.velocity = new Vector2(1, 0) * dashForce;
+            else             rig.velocity = new Vector2(-1, 0) * dashForce;
+        }
+        else rig.velocity = JoyVector() * dashForce;
+        Invoke("EndDash", dashTime);
+    }
+    public void EndDash()
+    {
+        rig.velocity *= .3f;
+        dashing = false;
+        dashCooldown = maxDashCooldown;
+        if (!grounded) Invoke("EndDashAnimation", .25f);
+        else Invoke("EndDashAnimation", .45f);
+    }
+    void EndDashAnimation() { animator.SetBool("Dashing", false); }
+    #endregion
+
     #endregion
     #endregion
 
