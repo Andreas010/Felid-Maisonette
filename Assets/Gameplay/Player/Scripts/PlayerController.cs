@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     #region assignables
     [Header("Assignables")]
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CircleCollider2D groundCheckCol;
     [SerializeField] TriggerCheck groundCheck;
     [SerializeField] Transform visuals;
+
+    [SerializeField] SpriteRenderer[] srs; // 0 = head, 1 = torso, 2 = legs
 
     Animator animator;
     Controls input;
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float counterJump;
     #endregion
 
+    bool dir;
     bool grounded;
     bool sprinting;
     bool jumpHeld; bool jumping;
@@ -36,7 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        animator = transform.parent.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         InitControls();
     }
 
@@ -48,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
 
         ApplyHorizontalInput(joy.x);
-        if (joy.x > .5f) visuals.localScale = Vector3.one;
+        if (joy.x > .5f)  visuals.localScale = Vector3.one;
         if (joy.x < -.5f) visuals.localScale = new Vector3(-1, 1, 1);
 
         animator.SetBool("Grounded", grounded);
@@ -56,6 +60,8 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Magnitude", rig.velocity.magnitude);
         animator.SetFloat("XVel", rig.velocity.x);
         animator.SetFloat("YVel", rig.velocity.y);
+
+
     }
 
     private void FixedUpdate()
@@ -70,7 +76,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region other methods
+    #region movement methods
     void ApplyHorizontalInput(float input)
     {
         float targetVelocity = input * curSpeed;
@@ -129,5 +135,9 @@ public class PlayerController : MonoBehaviour
     public void Sprint(InputAction.CallbackContext t_context) { sprinting = true; }
     public void CancelSprint(InputAction.CallbackContext t_context) { sprinting = false; }
     #endregion
+    #endregion
+
+    #region network methods
+
     #endregion
 }

@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class LerpTo : MonoBehaviour
 {
 
-    [SerializeField] Transform target;
+    public Transform target;
     [SerializeField] float lerpTime;
     [SerializeField] Vector3 offset;
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, target.position + offset, lerpTime);
+        if(target) transform.position = Vector3.Lerp(transform.position, target.position + offset, lerpTime);
     }
 }
