@@ -80,6 +80,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c4defb9-9fee-4a08-a546-e74f56a5ef82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""7500620a-79ea-4b4d-a60a-2a6aa7bdb95e"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7deb7056-5d81-46a0-939c-200561527c02"",
+                    ""path"": ""<SwitchProControllerHID>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Keyboard"",
                     ""id"": ""3bea1a52-8166-49a2-a423-efea5c54f0cc"",
                     ""path"": ""1DAxis"",
@@ -273,7 +304,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b3cea966-e520-4dac-94e0-fbe238e1fa31"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -306,7 +337,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""59ba7ad2-9972-4852-9bdb-595883f12180"",
-                    ""path"": ""<SwitchProControllerHID>/buttonWest"",
+                    ""path"": ""<SwitchProControllerHID>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -317,11 +348,44 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""387fc3e8-b26f-46d2-83fb-7e483bc3e8de"",
-                    ""path"": ""<SwitchProControllerHID>/buttonNorth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ba9b278-53bc-40d3-b213-20b92d923fa1"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b91c1a3a-1001-4283-86fa-3fcab6e486dd"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd242e90-2a6b-42f7-afa5-f0e9acbf681c"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -338,6 +402,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_World_Attack = m_World.FindAction("Attack", throwIfNotFound: true);
         m_World_Sprint = m_World.FindAction("Sprint", throwIfNotFound: true);
         m_World_Dash = m_World.FindAction("Dash", throwIfNotFound: true);
+        m_World_ToggleWeapon = m_World.FindAction("ToggleWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,6 +468,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_Attack;
     private readonly InputAction m_World_Sprint;
     private readonly InputAction m_World_Dash;
+    private readonly InputAction m_World_ToggleWeapon;
     public struct WorldActions
     {
         private @Controls m_Wrapper;
@@ -413,6 +479,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_World_Attack;
         public InputAction @Sprint => m_Wrapper.m_World_Sprint;
         public InputAction @Dash => m_Wrapper.m_World_Dash;
+        public InputAction @ToggleWeapon => m_Wrapper.m_World_ToggleWeapon;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -440,6 +507,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnDash;
+                @ToggleWeapon.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleWeapon;
+                @ToggleWeapon.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleWeapon;
+                @ToggleWeapon.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleWeapon;
             }
             m_Wrapper.m_WorldActionsCallbackInterface = instance;
             if (instance != null)
@@ -462,6 +532,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @ToggleWeapon.started += instance.OnToggleWeapon;
+                @ToggleWeapon.performed += instance.OnToggleWeapon;
+                @ToggleWeapon.canceled += instance.OnToggleWeapon;
             }
         }
     }
@@ -474,5 +547,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnToggleWeapon(InputAction.CallbackContext context);
     }
 }

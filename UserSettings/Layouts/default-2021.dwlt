@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 0
+    x: -1920
     y: 43
     width: 1920
     height: 997
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 19991
+  controlID: 20562
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 19992
+  controlID: 20563
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 19967
+  controlID: 20570
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 19968
+  controlID: 20571
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,6 +248,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 13}
   - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 2
   m_LastSelected: 0
 --- !u!114 &11
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -269,15 +270,15 @@ MonoBehaviour:
     y: 562
     width: 1319
     height: 385
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 19}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 21}
   m_Panes:
-  - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 0
-  m_LastSelected: 1
+  - {fileID: 22}
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,14 +298,13 @@ MonoBehaviour:
     y: 0
     width: 601
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 23}
   m_Panes:
-  - {fileID: 22}
   - {fileID: 23}
   - {fileID: 24}
-  m_Selected: 1
+  m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &13
 MonoBehaviour:
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 406
+    x: -1514
     y: 73
     width: 911
     height: 541
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 1
+  m_EnterPlayModeBehavior: 2
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
+    x: -1920
     y: 73
     width: 405
     height: 541
@@ -431,7 +431,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 22fbffff
+      m_ExpandedIDs: 7a79fefff679feff247cfeff2685feffa285feffd087feffc697feff4298feff709afeff1ea5feff9aa5feffeaa7fefffab8feff76b9feffc6bbfeffd0c7feff4cc8feff7acafefff8ecfeff98edfeffc4effeffc608ffff6609ffffa809ffff240cffffc40cffffde0effffe81affff881bffffb41dffffe6adffff62aeffff8eb0ffff22fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -510,7 +510,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 406
+    x: -1514
     y: 73
     width: 911
     height: 541
@@ -770,9 +770,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.7250051, y: 1.2033334, z: 0.02517778}
+    m_Target: {x: 0.36841625, y: 3.3992743, z: 0.00936711}
     speed: 2
-    m_Value: {x: 0.7250051, y: 1.2033334, z: 0.02517778}
+    m_Value: {x: 0.36841625, y: 3.3992743, z: 0.00936711}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -823,9 +823,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.4820695
+    m_Target: 9.063136
     speed: 2
-    m_Value: 7.4820695
+    m_Value: 9.063136
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -870,10 +870,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 405
+    x: 406
     y: 73
-    width: 909
-    height: 541
+    width: 911
+    height: 540
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -902,9 +902,9 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2dbb69f3
-    m_LastClickedID: -211174611
-    m_ExpandedIDs: 9cfe8ab3e0325fc8651792da69ec88eea4041b05ccec5754ff52b55ab61fe75b5b9665695415187d
+    m_SelectedIDs: 25e3173c
+    m_LastClickedID: 1008198437
+    m_ExpandedIDs: a4934d8b9cfe8ab3902bfab8e0325fc8651792da69ec88eea4041b05ccec5754ff52b55ab61fe75b5b9665695415187d
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -971,6 +971,10 @@ MonoBehaviour:
       \"type\": \"Button\",\n                    \"id\": \"b24e6574-eda6-4f54-8ad8-a04cee4f5dea\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
+      },\n                {\n                    \"name\": \"ToggleWeapon\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"0c4defb9-9fee-4a08-a546-e74f56a5ef82\",\n                   
+      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       }\n            ],\n            \"bindings\": [\n                {\n                   
       \"name\": \"Keyboard\",\n                    \"id\": \"e765bdc4-b65d-4c6a-891d-9531440382e7\",\n                   
       \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
@@ -1023,13 +1027,24 @@ MonoBehaviour:
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Attack\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"Keyboard\",\n                    \"id\": \"3bea1a52-8166-49a2-a423-efea5c54f0cc\",\n                   
-      \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
-      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Vertical\",\n                    \"isComposite\": true,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"negative\",\n                    \"id\": \"4b08eb48-b7fd-4e78-afdc-dee165127bd5\",\n                   
-      \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"\",\n                    \"id\": \"7500620a-79ea-4b4d-a60a-2a6aa7bdb95e\",\n                   
+      \"path\": \"<XInputController>/rightTrigger\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Attack\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"7deb7056-5d81-46a0-939c-200561527c02\",\n                   
+      \"path\": \"<SwitchProControllerHID>/rightTrigger\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Attack\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"Keyboard\",\n                    \"id\":
+      \"3bea1a52-8166-49a2-a423-efea5c54f0cc\",\n                    \"path\": \"1DAxis\",\n                   
+      \"interactions\": \"\",\n                    \"processors\": \"\",\n                   
+      \"groups\": \"\",\n                    \"action\": \"Vertical\",\n                   
+      \"isComposite\": true,\n                    \"isPartOfComposite\": false\n               
+      },\n                {\n                    \"name\": \"negative\",\n                   
+      \"id\": \"4b08eb48-b7fd-4e78-afdc-dee165127bd5\",\n                    \"path\":
+      \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Vertical\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": true\n                },\n                {\n                   
@@ -1060,7 +1075,7 @@ MonoBehaviour:
       \"action\": \"Sprint\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
       \"name\": \"\",\n                    \"id\": \"b3cea966-e520-4dac-94e0-fbe238e1fa31\",\n                   
-      \"path\": \"<XInputController>/buttonSouth\",\n                    \"interactions\":
+      \"path\": \"<XInputController>/buttonNorth\",\n                    \"interactions\":
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
       \"\",\n                    \"action\": \"Sprint\",\n                    \"isComposite\":
       false,\n                    \"isPartOfComposite\": false\n                },\n               
@@ -1075,16 +1090,32 @@ MonoBehaviour:
       \"action\": \"Dash\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
       \"name\": \"\",\n                    \"id\": \"59ba7ad2-9972-4852-9bdb-595883f12180\",\n                   
-      \"path\": \"<SwitchProControllerHID>/buttonWest\",\n                    \"interactions\":
+      \"path\": \"<SwitchProControllerHID>/buttonSouth\",\n                    \"interactions\":
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
       \"\",\n                    \"action\": \"Dash\",\n                    \"isComposite\":
       false,\n                    \"isPartOfComposite\": false\n                },\n               
       {\n                    \"name\": \"\",\n                    \"id\": \"387fc3e8-b26f-46d2-83fb-7e483bc3e8de\",\n                   
-      \"path\": \"<SwitchProControllerHID>/buttonNorth\",\n                    \"interactions\":
+      \"path\": \"<XInputController>/buttonSouth\",\n                    \"interactions\":
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
       \"\",\n                    \"action\": \"Dash\",\n                    \"isComposite\":
-      false,\n                    \"isPartOfComposite\": false\n                }\n           
-      ]\n        }\n    ],\n    \"controlSchemes\": []\n}"
+      false,\n                    \"isPartOfComposite\": false\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"7ba9b278-53bc-40d3-b213-20b92d923fa1\",\n                   
+      \"path\": \"<Keyboard>/ctrl\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"ToggleWeapon\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"b91c1a3a-1001-4283-86fa-3fcab6e486dd\",\n                   
+      \"path\": \"<XInputController>/buttonWest\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"ToggleWeapon\",\n                   
+      \"isComposite\": false,\n                    \"isPartOfComposite\": false\n               
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"fd242e90-2a6b-42f7-afa5-f0e9acbf681c\",\n                    \"path\":
+      \"<XInputController>/buttonNorth\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"ToggleWeapon\",\n                   
+      \"isComposite\": false,\n                    \"isPartOfComposite\": false\n               
+      }\n            ]\n        }\n    ],\n    \"controlSchemes\": []\n}"
     m_IsDirty: 0
   m_Toolbar:
     m_IsDirty: 0
@@ -1136,6 +1167,70 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Animator
+    m_Image: {fileID: 663490763026382308, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 406
+    y: 73
+    width: 911
+    height: 540
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_ViewTransforms:
+    m_KeySerializationHelper:
+    - {fileID: -7616582918020496140, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
+    m_ValueSerializationHelper:
+    - e00: 0.9262885
+      e01: 0
+      e02: 0
+      e03: 9.332733
+      e10: 0
+      e11: 0.9262885
+      e12: 0
+      e13: 269.96246
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_PreviewAnimator: {fileID: 0}
+  m_AnimatorController: {fileID: 9100000, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
+  m_BreadCrumbs:
+  - m_Target: {fileID: -7616582918020496140, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
+    m_ScrollPosition: {x: 0, y: 0}
+  stateMachineGraph: {fileID: 0}
+  stateMachineGraphGUI: {fileID: 0}
+  blendTreeGraph: {fileID: 0}
+  blendTreeGraphGUI: {fileID: 0}
+  m_AutoLiveLink: 1
+  m_MiniTool: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_CurrentEditor: 1
+  m_LayerEditor:
+    m_SelectedLayerIndex: 0
+--- !u!114 &20
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -1148,7 +1243,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
+    x: -1920
     y: 635
     width: 1318
     height: 364
@@ -1184,7 +1279,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: c4620000
     m_LastClickedID: 25284
-    m_ExpandedIDs: 00000000d6600000d8600000da600000dc60000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000e2600000e4600000e6600000e860000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1212,7 +1307,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d6600000d8600000da600000dc60000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000e2600000e4600000e6600000e860000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1239,8 +1334,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c62300006c5f0000925f00008a5f0000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c62300006c5f0000925f00007a7e0000ac930000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1268,7 +1363,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &20
+--- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1288,7 +1383,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
+    x: -1920
     y: 635
     width: 1318
     height: 364
@@ -1296,7 +1391,7 @@ MonoBehaviour:
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
---- !u!114 &21
+--- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1317,80 +1412,16 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 635
+    y: 634
     width: 1318
-    height: 364
+    height: 365
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 36544
---- !u!114 &22
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animator
-    m_Image: {fileID: 663490763026382308, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 1319
-    y: 73
-    width: 600
-    height: 926
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_ViewTransforms:
-    m_KeySerializationHelper:
-    - {fileID: -7616582918020496140, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.62306875
-      e01: 0
-      e02: 0
-      e03: -5.687805
-      e10: 0
-      e11: 0.62306875
-      e12: 0
-      e13: 290.72803
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: -7616582918020496140, guid: 50c291b9316f7d94b99047b9625f181f, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  stateMachineGraph: {fileID: 0}
-  stateMachineGraphGUI: {fileID: 0}
-  blendTreeGraph: {fileID: 0}
-  blendTreeGraphGUI: {fileID: 0}
-  m_AutoLiveLink: 1
-  m_MiniTool: 0
-  m_LockTracker:
-    m_IsLocked: 0
-  m_CurrentEditor: 1
-  m_LayerEditor:
-    m_SelectedLayerIndex: 0
+  m_LastSelectedObjectID: 45390
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1411,7 +1442,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1319
+    x: -601
     y: 73
     width: 600
     height: 926

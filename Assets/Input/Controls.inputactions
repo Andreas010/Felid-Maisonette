@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleWeapon",
+                    "type": "Button",
+                    "id": "0c4defb9-9fee-4a08-a546-e74f56a5ef82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -172,6 +181,28 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "7500620a-79ea-4b4d-a60a-2a6aa7bdb95e",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7deb7056-5d81-46a0-939c-200561527c02",
+                    "path": "<SwitchProControllerHID>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Keyboard",
                     "id": "3bea1a52-8166-49a2-a423-efea5c54f0cc",
                     "path": "1DAxis",
@@ -251,7 +282,7 @@
                 {
                     "name": "",
                     "id": "b3cea966-e520-4dac-94e0-fbe238e1fa31",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<XInputController>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -284,7 +315,7 @@
                 {
                     "name": "",
                     "id": "59ba7ad2-9972-4852-9bdb-595883f12180",
-                    "path": "<SwitchProControllerHID>/buttonWest",
+                    "path": "<SwitchProControllerHID>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -295,11 +326,44 @@
                 {
                     "name": "",
                     "id": "387fc3e8-b26f-46d2-83fb-7e483bc3e8de",
-                    "path": "<SwitchProControllerHID>/buttonNorth",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ba9b278-53bc-40d3-b213-20b92d923fa1",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b91c1a3a-1001-4283-86fa-3fcab6e486dd",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd242e90-2a6b-42f7-afa5-f0e9acbf681c",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

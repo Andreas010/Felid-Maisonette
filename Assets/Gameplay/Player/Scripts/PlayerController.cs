@@ -29,10 +29,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] float walkSpeed = 4.5f; [SerializeField] float runSpeed = 7.5f; [SerializeField] float acceleration = 25f;
     [SerializeField] float jumpForce = 11.5f; [SerializeField] float counterJump = 3; [SerializeField] float velYToApplyCounterJump; /* Y velocity when jumping that will automatically apply the counter jump */ [SerializeField] float jumpInputForgiveness = .5f; float timeSinceJump; bool counterJumpApplied;
     [SerializeField] float cyoteTime = .25f;
-    [SerializeField] float dashForce = 14f; [SerializeField] float dashTime = .2f; [SerializeField] float maxDashCooldown = 1f; float dashCooldown;
+    [SerializeField] float dashForce = 14f; [SerializeField] float dashTime = .2f; [SerializeField] float maxDashCooldown = 1f; float dashCooldown; [SerializeField] float groundedDashModifier = 1.3f;
     #endregion
 
-    bool facingRight;
+    [System.NonSerialized] public bool facingRight;
     bool grounded; float timeSinceGrounded;
     bool sprinting;
     bool jumpHeld; bool jumping;
@@ -170,16 +170,19 @@ public class PlayerController : NetworkBehaviour
         dashing = true;
         canDash = false;
 
+        float t_finalDashForce;
+        if (grounded) t_finalDashForce = dashForce * groundedDashModifier; else t_finalDashForce = dashForce;
+
         animator.StopPlayback();
         animator.SetBool("Dashing", true);
         animator.SetTrigger("Roll");
         //if (!((joy.x > -.2f && joy.x < .2f) && joy.y > .2f)) animator.SetTrigger("Roll");
         if (joy.magnitude < .2f)
         {
-            if (facingRight) rig.velocity = new Vector2(1, 0) * dashForce;
-            else             rig.velocity = new Vector2(-1, 0) * dashForce;
+            if (facingRight) rig.velocity = new Vector2(1, 0) * t_finalDashForce;
+            else             rig.velocity = new Vector2(-1, 0) * t_finalDashForce;
         }
-        else rig.velocity = JoyVector() * dashForce;
+        else rig.velocity = JoyVector() * t_finalDashForce;
         Invoke("EndDash", dashTime);
     }
     public void EndDash()
