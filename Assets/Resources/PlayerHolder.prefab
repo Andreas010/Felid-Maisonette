@@ -394,6 +394,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  weaponOut: 0
+  comboAttackWindow: 1
+  attackStartVelocityMod: 0.8
 --- !u!114 &6021757901367884672
 MonoBehaviour:
   m_ObjectHideFlags: 0
