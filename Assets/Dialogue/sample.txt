@@ -1,0 +1,25 @@
+&main
+Hello, I'm a test.
+I'm some funny dialogue.
+
+; I'm a comment.
+
+A line break means you must interact to speak with me again.
+
+I'm a question
+	-> Yes: { #yes_section }
+	-> No: { #no_section }
+
+Call a C# event?
+	-> Yes: { $my_cs_event }
+	-> No: {
+		Alright.
+	}
+
+&yes_section
+You chose yes
+#main
+
+&no_section
+You chose no
+#main
