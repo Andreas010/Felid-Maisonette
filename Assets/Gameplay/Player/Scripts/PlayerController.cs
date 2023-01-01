@@ -9,7 +9,7 @@ public class PlayerController : NetworkBehaviour
 {
     #region assignables
     [Header("Assignables")]
-    Rigidbody2D rig;
+    [System.NonSerialized] public Rigidbody2D rig;
     [SerializeField] CircleCollider2D groundCheckCol;
     [SerializeField] TriggerCheck groundCheck;
     [SerializeField] Transform visuals;
@@ -36,11 +36,12 @@ public class PlayerController : NetworkBehaviour
     bool grounded; float timeSinceGrounded;
     bool sprinting;
     bool jumpHeld; bool jumping;
+    [System.NonSerialized] public bool attacking;
 
     float curSpeed;
 
     bool dashing; bool canDash;
-    bool canMove;
+    [System.NonSerialized] public bool canMove;
 
     #region unityMethods
     void Start()
@@ -57,7 +58,7 @@ public class PlayerController : NetworkBehaviour
         if (sprinting) curSpeed = runSpeed; else curSpeed = walkSpeed;
         grounded = groundCheck.overlapping;
 
-        canMove = !dashing;
+        canMove = !dashing && !attacking;
         if(canMove)
         {
             ApplyHorizontalInput(joy.x);
@@ -71,23 +72,26 @@ public class PlayerController : NetworkBehaviour
                 if (timeSinceJump > .25f) { jumping = false; counterJumpApplied = false; }
                 if(timeSinceJump < jumpInputForgiveness && jumpHeld) { Jump(new InputAction.CallbackContext()); }
                 canDash = true;
+                if (joy.x > -.1f && joy.x < .1f && grounded) ChangePhysicsMat(1); else ChangePhysicsMat(0);
             }
             else
             {
-                
+                ChangePhysicsMat(0);
             }
-
-            animator.SetBool("Grounded", grounded);
-            animator.SetBool("Sprinting", sprinting);
-            animator.SetFloat("Magnitude", rig.velocity.magnitude);
-            animator.SetFloat("XVel", rig.velocity.x);
-            animator.SetFloat("YVel", rig.velocity.y);
+        }
+        else
+        {
+            if(!dashing) ChangePhysicsMat(1); else ChangePhysicsMat(0);
         }
 
-        for (int i = 0; i < 3; i++) { partSpriteIndexes[i] = int.Parse(Regex.Replace(srs[i].sprite.name, "[A-Za-z ]", "").Trim('_')); }
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Sprinting", sprinting);
+        animator.SetBool("Attacking", attacking);
+        animator.SetFloat("Magnitude", rig.velocity.magnitude);
+        animator.SetFloat("XVel", rig.velocity.x);
+        animator.SetFloat("YVel", rig.velocity.y);
 
-        if (joy.x > -.1f && joy.x < .1f && grounded) collider.sharedMaterial = physicsMaterials[1];
-        else collider.sharedMaterial = physicsMaterials[0];
+        for (int i = 0; i < 3; i++) { partSpriteIndexes[i] = int.Parse(Regex.Replace(srs[i].sprite.name, "[A-Za-z ]", "").Trim('_')); }
 
         dashCooldown -= Time.deltaTime;
         timeSinceJump += Time.deltaTime;
@@ -119,6 +123,23 @@ public class PlayerController : NetworkBehaviour
                 deltaVelocity *= 0.25f;
         }
         rig.velocity = new Vector2(currentVelocity + deltaVelocity * acceleration * Time.deltaTime, rig.velocity.y);
+    }
+
+    public void ApplyForwardForce(float t_force)
+    {
+        if (joy.y < -.5f) return;
+        if(facingRight) rig.AddForce(transform.right * t_force, ForceMode2D.Impulse);
+        else rig.AddForce(-transform.right * t_force, ForceMode2D.Impulse);
+    }
+    public void ApplyUpwardForce(float t_force)
+    {
+        if (facingRight) rig.AddForce(transform.up * t_force, ForceMode2D.Impulse);
+        else rig.AddForce(-transform.up * t_force, ForceMode2D.Impulse);
+    }
+
+    public void ChangePhysicsMat(int t_indexOfNewMat)
+    {
+        collider.sharedMaterial = physicsMaterials[t_indexOfNewMat];
     }
 
     #region input
