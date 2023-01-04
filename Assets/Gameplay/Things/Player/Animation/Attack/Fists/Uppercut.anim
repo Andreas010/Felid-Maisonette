@@ -136,14 +136,14 @@ AnimationClip:
     functionName: ApplyForwardForce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 3
+    floatParameter: -2
     intParameter: 0
     messageOptions: 0
-  - time: 0.38333333
-    functionName: ApplyUpwardForce
+  - time: 0.41666666
+    functionName: SendAttack
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 5
+    floatParameter: 2
     intParameter: 0
     messageOptions: 0
   - time: 0.73333335

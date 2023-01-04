@@ -545,6 +545,13 @@ AnimationClip:
     floatParameter: 4
     intParameter: 0
     messageOptions: 0
+  - time: 0.46666667
+    functionName: SendAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 2
+    intParameter: 0
+    messageOptions: 0
   - time: 0.73333335
     functionName: EndAttack
     data: 

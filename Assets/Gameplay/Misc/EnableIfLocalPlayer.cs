@@ -7,25 +7,24 @@ public class EnableIfLocalPlayer : NetworkBehaviour
 {
 
     [SerializeField] Behaviour[] components;
+    [SerializeField] Behaviour[] components_StayEnabledOnServer;
     [SerializeField] NetworkIdentity identity;
 
     void Start()
     {
         if (identity)
         {
+            if (isServer) foreach (Behaviour t_c in components_StayEnabledOnServer) t_c.enabled = true;
+
             if (NetworkClient.localPlayer != identity)
             {
-                foreach (Behaviour t_c in components)
-                {
-                    t_c.enabled = false;
-                }
+                foreach (Behaviour t_c in components) t_c.enabled = false;
+                if (!isServer) foreach (Behaviour t_c in components_StayEnabledOnServer) t_c.enabled = false;
             }
             else
             {
-                foreach (Behaviour t_c in components)
-                {
-                    t_c.enabled = true;
-                }
+                foreach (Behaviour t_c in components) t_c.enabled = true;
+                if (!isServer) foreach (Behaviour t_c in components_StayEnabledOnServer) t_c.enabled = true;
             }
         }
         else

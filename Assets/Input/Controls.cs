@@ -64,6 +64,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Attack M2"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f05ee18-f6a2-4b20-9c14-845976d595a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""0c4dd8e2-3116-4b16-90c1-19953fbe27bb"",
@@ -205,7 +214,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7500620a-79ea-4b4d-a60a-2a6aa7bdb95e"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<XInputController>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -216,7 +225,18 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7deb7056-5d81-46a0-939c-200561527c02"",
-                    ""path"": ""<SwitchProControllerHID>/rightTrigger"",
+                    ""path"": ""<SwitchProControllerHID>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dbb8781-c133-4625-952c-7a0837009406"",
+                    ""path"": ""<Keyboard>/leftBracket"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -388,6 +408,72 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""566b5946-41a9-4f63-9a27-dd24de0d096d"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a26d628-d9e7-497c-bf7e-564a42b7ab71"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""811488f9-e2ad-469a-8c2d-81cf3d121116"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack M2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09529c06-a117-4a34-9f2e-aaf4401219b3"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack M2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f11c60a2-4a19-4d82-a7c6-d4e9c6957c31"",
+                    ""path"": ""<SwitchProControllerHID>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack M2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8eb0df05-9b00-4729-8953-486f227e1b56"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack M2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -400,6 +486,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_World_Vertical = m_World.FindAction("Vertical", throwIfNotFound: true);
         m_World_Jump = m_World.FindAction("Jump", throwIfNotFound: true);
         m_World_Attack = m_World.FindAction("Attack", throwIfNotFound: true);
+        m_World_AttackM2 = m_World.FindAction("Attack M2", throwIfNotFound: true);
         m_World_Sprint = m_World.FindAction("Sprint", throwIfNotFound: true);
         m_World_Dash = m_World.FindAction("Dash", throwIfNotFound: true);
         m_World_ToggleWeapon = m_World.FindAction("ToggleWeapon", throwIfNotFound: true);
@@ -466,6 +553,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_Vertical;
     private readonly InputAction m_World_Jump;
     private readonly InputAction m_World_Attack;
+    private readonly InputAction m_World_AttackM2;
     private readonly InputAction m_World_Sprint;
     private readonly InputAction m_World_Dash;
     private readonly InputAction m_World_ToggleWeapon;
@@ -477,6 +565,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Vertical => m_Wrapper.m_World_Vertical;
         public InputAction @Jump => m_Wrapper.m_World_Jump;
         public InputAction @Attack => m_Wrapper.m_World_Attack;
+        public InputAction @AttackM2 => m_Wrapper.m_World_AttackM2;
         public InputAction @Sprint => m_Wrapper.m_World_Sprint;
         public InputAction @Dash => m_Wrapper.m_World_Dash;
         public InputAction @ToggleWeapon => m_Wrapper.m_World_ToggleWeapon;
@@ -501,6 +590,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttack;
+                @AttackM2.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttackM2;
+                @AttackM2.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttackM2;
+                @AttackM2.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnAttackM2;
                 @Sprint.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnSprint;
@@ -526,6 +618,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @AttackM2.started += instance.OnAttackM2;
+                @AttackM2.performed += instance.OnAttackM2;
+                @AttackM2.canceled += instance.OnAttackM2;
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
@@ -545,6 +640,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnAttackM2(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnToggleWeapon(InputAction.CallbackContext context);

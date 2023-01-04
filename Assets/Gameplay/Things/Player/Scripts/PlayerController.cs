@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] Transform visuals;
     CapsuleCollider2D collider;
     [SerializeField] PhysicsMaterial2D[] physicsMaterials; // 0 = no friction, 1 = high friction
+    Entity entityScript;
 
     [SerializeField] SpriteRenderer[] srs; //(index) 0 = head, 1 = torso, 2 = legs
     [SerializeField] int[] partSpriteIndexes = new int[3]; //(index) 0 = head, 1 = torso, 2 = legs (this variable is which frame of animation each part of the player is currently on)
@@ -49,6 +50,7 @@ public class PlayerController : NetworkBehaviour
         rig = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
+        entityScript = GetComponent<Entity>();
         InitControls();
     }
 
@@ -58,7 +60,7 @@ public class PlayerController : NetworkBehaviour
         if (sprinting) curSpeed = runSpeed; else curSpeed = walkSpeed;
         grounded = groundCheck.overlapping;
 
-        canMove = !dashing && !attacking;
+        canMove = !dashing && !attacking && !entityScript.takingKnockback;
         if(canMove)
         {
             ApplyHorizontalInput(joy.x);
@@ -127,18 +129,22 @@ public class PlayerController : NetworkBehaviour
 
     public void ApplyForwardForce(float t_force)
     {
+        if (!isLocalPlayer) return;
+
         if (joy.y < -.5f) return;
         if(facingRight) rig.AddForce(transform.right * t_force, ForceMode2D.Impulse);
-        else rig.AddForce(-transform.right * t_force, ForceMode2D.Impulse);
+        else rig.AddForce(transform.right * -t_force, ForceMode2D.Impulse);
     }
     public void ApplyUpwardForce(float t_force)
     {
-        if (facingRight) rig.AddForce(transform.up * t_force, ForceMode2D.Impulse);
-        else rig.AddForce(-transform.up * t_force, ForceMode2D.Impulse);
+        if (!isLocalPlayer) return;
+
+        rig.AddForce(transform.up * t_force, ForceMode2D.Impulse);
     }
 
     public void ChangePhysicsMat(int t_indexOfNewMat)
     {
+        if (entityScript.takingKnockback) return;
         collider.sharedMaterial = physicsMaterials[t_indexOfNewMat];
     }
 
