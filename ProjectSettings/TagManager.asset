@@ -51,6 +51,9 @@ TagManager:
   - name: Foreground
     uniqueID: 1129800971
     locked: 0
+  - name: Foreground Cover-Up
+    uniqueID: 2590784775
+    locked: 0
   - name: Entities
     uniqueID: 3771178495
     locked: 0

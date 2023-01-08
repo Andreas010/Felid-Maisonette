@@ -10,7 +10,6 @@ public class PlayerAttackController : NetworkBehaviour
     #region per-move
     Vector2 currentAttackColPos;
     Vector2 currentAttackColSize;
-    [SerializeField] Vector3 attackColliderOffset; // offsets the collider
     [SerializeField] float currentKnockbackTime;
     #endregion
 
@@ -26,6 +25,8 @@ public class PlayerAttackController : NetworkBehaviour
     [SerializeField] bool debug;
     int indexInCombo;
     float timeSinceLastAttack;
+    string currentAttackName;
+    string lastAttackHitBy;
 
     [SerializeField] float comboAttackWindow = 1; // Ammount of time after your last attack that you will be able to combo another move
     [SerializeField] float attackStartVelocityMod; // Modification to the player's velocity once an attack begins in order to stop sliding when attacking ex: .5f (slows velocity by half when you begin attacking)
@@ -108,8 +109,9 @@ public class PlayerAttackController : NetworkBehaviour
             currentAttackColSize = new Vector2(1.8f, 2f);
             currentKnockbackForce = new Vector2(2, 12);
             currentKnockbackTime = 1.5f;
-
-            animator.SetTrigger("Uppercut");
+            
+            currentAttackName = "Uppercut";
+            animator.SetTrigger(currentAttackName);
         }
         else
         {
@@ -117,12 +119,13 @@ public class PlayerAttackController : NetworkBehaviour
             {
                 case "Rusty Sword":
                     {
-                        currentAttackColPos = new Vector2(1f, -.4f);
-                        currentAttackColSize = new Vector2(1.8f, 2f);
+                        currentAttackColPos = new Vector2(1.3f, -.4f);
+                        currentAttackColSize = new Vector2(2.6f, 2f);
                         currentKnockbackForce = new Vector2(12, 4);
                         currentKnockbackTime = 1.5f;
 
-                        animator.SetTrigger("Rusty Sword_Thrust");
+                        currentAttackName = "Rusty Sword_Thrust";
+                        animator.SetTrigger(currentAttackName);
                         break;
                     }
                 default:
@@ -133,7 +136,7 @@ public class PlayerAttackController : NetworkBehaviour
             }
         }
 
-        indexInCombo = 0;
+        if (indexInCombo >= currentWeaponComboLength - 1) { timeSinceLastAttack = 99; indexInCombo = 0; }
     }
 
     void Attack(InputAction.CallbackContext t_context)
@@ -149,24 +152,28 @@ public class PlayerAttackController : NetworkBehaviour
 
             if (indexInCombo == 0)
             {
-                animator.SetTrigger("LeftPunch");
+                currentAttackName = "LeftPunch";
+                animator.SetTrigger(currentAttackName);
             }
             else if(indexInCombo == 1)
             {
-                animator.SetTrigger("RightPunch");
+                currentAttackName = "RightPunch";
+                animator.SetTrigger(currentAttackName);
             }
             else if (indexInCombo == 2)
             {
-                animator.SetTrigger("LeftPunch");
+                currentAttackName = "LeftPunch";
+                animator.SetTrigger(currentAttackName);
             }
             else if (indexInCombo == 3)
             {
                 currentAttackColPos = new Vector2(.7f, -.4f);
                 currentAttackColSize = new Vector2(2.3f, 2f);
-                currentKnockbackForce = new Vector2(2, 12);
+                currentKnockbackForce = new Vector2(8, -12);
                 currentKnockbackTime = 1.5f;
 
-                animator.SetTrigger("Uppercut");
+                currentAttackName = "PunchDown";
+                animator.SetTrigger(currentAttackName);
             }
         }
         else
@@ -182,24 +189,29 @@ public class PlayerAttackController : NetworkBehaviour
 
                         if (indexInCombo == 0)
                         {
-                            animator.SetTrigger("Rusty Sword_SlashDown");
+                            currentAttackName = "Rusty Sword_SlashDown";
+                            animator.SetTrigger(currentAttackName);
+                            
                         }
                         else if (indexInCombo == 1)
                         {
-                            animator.SetTrigger("Rusty Sword_SlashUp");
+                            currentAttackName = "Rusty Sword_SlashUp";
+                            animator.SetTrigger(currentAttackName);
                         }
                         else if (indexInCombo == 2)
                         {
-                            animator.SetTrigger("Rusty Sword_SlashDown");
+                            currentAttackName = "Rusty Sword_SlashDown";
+                            animator.SetTrigger(currentAttackName);
                         }
                         else if (indexInCombo == 3)
                         {
-                            currentAttackColPos = new Vector2(.7f, -.4f);
-                            currentAttackColSize = new Vector2(2.3f, 2f);
-                            currentKnockbackForce = new Vector2(12, 4);
+                            currentAttackColPos = new Vector2(.25f, -.4f);
+                            currentAttackColSize = new Vector2(3.2f, 2f);
+                            currentKnockbackForce = new Vector2(-10, 6);
                             currentKnockbackTime = 1.5f;
 
-                            animator.SetTrigger("Rusty Sword_Thrust");
+                            currentAttackName = "Rusty Sword_ThrowBack";
+                            animator.SetTrigger(currentAttackName);
                         }
                         break;
                     }
@@ -256,8 +268,8 @@ public class PlayerAttackController : NetworkBehaviour
 
     Vector3 CalculateAttackColPos()
     {
-        if (playerController.facingRight) return transform.position + new Vector3(currentAttackColPos.x, currentAttackColPos.y, 0) + attackColliderOffset;
-        else return transform.position + new Vector3(currentAttackColPos.x * -1, currentAttackColPos.y, 0) + attackColliderOffset;
+        if (playerController.facingRight) return transform.position + new Vector3(currentAttackColPos.x, currentAttackColPos.y, 0);
+        else return transform.position + new Vector3(currentAttackColPos.x * -1, currentAttackColPos.y, 0);
     }
 
     public void EndAttack()

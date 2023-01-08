@@ -50,7 +50,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 7c0f3144f23ddee42b97c8b8ee1edcc3
+  m_AssetId: eb11b4a45c700e1478b137bea434eef6
   hasSpawned: 0
 --- !u!114 &3498189758476048082
 MonoBehaviour:
@@ -4893,9 +4893,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -523788801
+  m_SortingLayer: 5
+  m_SortingOrder: -99
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

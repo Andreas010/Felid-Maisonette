@@ -8,6 +8,7 @@ public class Entity : NetworkBehaviour
 
     [SyncVar]
     public bool takingKnockback;
+    bool hasStoppedTakingKnockback;
     // [System.NonSerialized]
 
     [Header("Assignables")]
@@ -47,16 +48,18 @@ public class Entity : NetworkBehaviour
 
     private void Update()
     {
-        if (currentKnockbackTime > 0)
+       /* if (currentKnockbackTime > 0)
         {
             ChangePhysicsMat(0);
             currentKnockbackTime -= Time.deltaTime;
             takingKnockback = true;
+            hasStoppedTakingKnockback = false;
         }
         else
         {
+            if (!hasStoppedTakingKnockback) { hasStoppedTakingKnockback = true; ChangePhysicsMat(1); }
             takingKnockback = false;
-        }
+        }*/
     }
 
     [Server]
@@ -71,8 +74,9 @@ public class Entity : NetworkBehaviour
         {
             RPC_SpawnParticles("Hit");
         }
+        RPC_HitFlash();
 
-        if(!isServerEntity)
+        if (!isServerEntity)
         {
             RPC_TakeDamage(t_damage, t_knockback, t_knockbackTime);
         }
@@ -116,7 +120,7 @@ public class Entity : NetworkBehaviour
     public void RPC_HitFlash()
     {
         foreach(SpriteRenderer t_sr in srs) t_sr.material = hitFlashMat;
-        Invoke("StopHitFlash", .1f );
+        Invoke("StopHitFlash", .08f );
     }
     //[ClientRpc]
     public void StopHitFlash()
@@ -130,7 +134,7 @@ public class Entity : NetworkBehaviour
         GameObject t_particles = null;
         if (t_type == "Hit") t_particles = Instantiate(hitParticles, transform.position, Quaternion.identity);
         else if (t_type == "Death") t_particles = Instantiate(deathParticles, transform.position, Quaternion.identity);
-        if (!isServerEntity) t_particles.transform.position = new Vector3(t_particles.transform.position.x, t_particles.transform.position.y + 3, 0);
+        if (!isServerEntity) t_particles.transform.position = new Vector3(t_particles.transform.position.x, t_particles.transform.position.y, 0);
         if(t_particles) Destroy(t_particles, 2);
     }
 

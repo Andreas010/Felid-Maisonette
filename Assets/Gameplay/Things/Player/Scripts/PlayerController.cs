@@ -193,7 +193,7 @@ public class PlayerController : NetworkBehaviour
     #region dash
     public void Dash(InputAction.CallbackContext t_context)
     {
-        if (dashCooldown > 0 || !canDash) return;
+        if (dashCooldown > 0 || !canDash || attacking) return;
         dashing = true;
         canDash = false;
 
